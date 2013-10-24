@@ -13,9 +13,12 @@ public class ParkingLot {
     }
 
     public String park(Car car) {
-        String token = generateToken(car.getLicense());
-        carMap.put(token,car);
+        if(getEmptyLotNum()>0){
+            String token = generateToken(car.getLicense());
+            carMap.put(token,car);
         return token;
+        }
+        return null;
     }
 
     private String generateToken(String license) {
@@ -28,5 +31,9 @@ public class ParkingLot {
 
     public boolean contains(Car car) {
         return carMap.containsValue(car);
+    }
+
+    public Car takeCar(String token) {
+        return carMap.get(token);
     }
 }

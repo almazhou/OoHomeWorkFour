@@ -18,7 +18,7 @@ public class ParkingBoyTest {
     public void setUp() throws Exception {
         parkingLot = new ParkingLot(1, "1");
         parkingLot1 = new ParkingLot(1, "2");
-        parkingBoy = new ParkingBoy();
+        parkingBoy = new ParkingBoy(new NormalChooser());
         parkingBoy.manage(parkingLot);
         parkingBoy.manage(parkingLot1);
         car = new Car("0");

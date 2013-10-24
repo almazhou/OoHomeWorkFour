@@ -9,8 +9,14 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLotList;
+    private NormalChooser chooser;
 
-    public ParkingBoy() {
+    public ParkingBoy(NormalChooser chooser) {
+        this.chooser = chooser;
+        this.parkingLotList = new ArrayList<ParkingLot>();
+    }
+
+    ParkingBoy() {
         this.parkingLotList = new ArrayList<ParkingLot>();
     }
 
@@ -20,23 +26,8 @@ public class ParkingBoy {
 
     public String park(Car car) {
         List<ParkingLot> sortedList = parkingLotList;
-        ParkingLot lot = new NormalChooser().choose(sortedList);
+        ParkingLot lot = chooser.choose(sortedList);
         return lot != null ? lot.park(car) : null;
-    }
-    class NormalChooser{
-        public ParkingLot choose(List<ParkingLot> sortedList) {
-            Collection<ParkingLot> filteredLot = Collections2.filter(sortedList, new Predicate<ParkingLot>() {
-                @Override
-                public boolean apply(ParkingLot lot) {
-                    return lot.getEmptyLotNum() > 0;
-                }
-            });
-            ParkingLot lot = null;
-            if (!filteredLot.isEmpty()) {
-                lot = newArrayList(filteredLot).get(0);
-            }
-            return lot;
-        }
     }
 
     public boolean parkedThisCar(final Car car) {

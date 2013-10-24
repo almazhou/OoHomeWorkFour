@@ -16,17 +16,12 @@ public class ParkingBoy {
         this.parkingLotList = new ArrayList<ParkingLot>();
     }
 
-    ParkingBoy() {
-        this.parkingLotList = new ArrayList<ParkingLot>();
-    }
-
     public void manage(ParkingLot parkingLot) {
         this.parkingLotList.add(parkingLot);
     }
 
     public String park(Car car) {
-        List<ParkingLot> sortedList = parkingLotList;
-        ParkingLot lot = chooser.choose(sortedList);
+        ParkingLot lot = chooser.choose(parkingLotList);
         return lot != null ? lot.park(car) : null;
     }
 

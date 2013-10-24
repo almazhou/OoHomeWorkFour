@@ -36,4 +36,8 @@ public class ParkingLot {
     public Car takeCar(String token) {
         return carMap.get(token);
     }
+
+    public double getRatio() {
+        return carMap.size()*1.0/lotNum;
+    }
 }

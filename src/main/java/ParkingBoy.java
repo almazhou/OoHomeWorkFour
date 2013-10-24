@@ -8,7 +8,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class ParkingBoy {
-    private List<ParkingLot> parkingLotList;
+    protected List<ParkingLot> parkingLotList;
 
     public ParkingBoy() {
         this.parkingLotList = new ArrayList<ParkingLot>();
@@ -19,14 +19,24 @@ public class ParkingBoy {
     }
 
     public String park(Car car) {
-        Collection<ParkingLot> filteredLot = Collections2.filter(parkingLotList, new Predicate<ParkingLot>() {
-            @Override
-            public boolean apply(ParkingLot lot) {
-                return lot.getEmptyLotNum() > 0;
+        List<ParkingLot> sortedList = parkingLotList;
+        ParkingLot lot = new NormalChooser().choose(sortedList);
+        return lot != null ? lot.park(car) : null;
+    }
+    class NormalChooser{
+        public ParkingLot choose(List<ParkingLot> sortedList) {
+            Collection<ParkingLot> filteredLot = Collections2.filter(sortedList, new Predicate<ParkingLot>() {
+                @Override
+                public boolean apply(ParkingLot lot) {
+                    return lot.getEmptyLotNum() > 0;
+                }
+            });
+            ParkingLot lot = null;
+            if (!filteredLot.isEmpty()) {
+                lot = newArrayList(filteredLot).get(0);
             }
-        });
-
-        return filteredLot.size() != 0 ? newArrayList(filteredLot).get(0).park(car) : null;
+            return lot;
+        }
     }
 
     public boolean parkedThisCar(final Car car) {
@@ -47,6 +57,6 @@ public class ParkingBoy {
             }
         });
 
-        return filter.size()!= 0 ? newArrayList(filter).get(0).takeCar(token):null;
+        return filter.size() != 0 ? newArrayList(filter).get(0).takeCar(token) : null;
     }
 }

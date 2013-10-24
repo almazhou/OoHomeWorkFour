@@ -17,7 +17,7 @@ public class SmartParkingBoyTest {
     public void setUp() throws Exception {
         parkingLot = new ParkingLot(1, "1");
         parkingLot1 = new ParkingLot(3, "2");
-        smartParkingBoy = new SmartParkingBoy(new SmartChooser());
+        smartParkingBoy = new ParkingBoy(new SmartChooser());
         smartParkingBoy.manage(parkingLot);
         smartParkingBoy.manage(parkingLot1);
         car = new Car("0");

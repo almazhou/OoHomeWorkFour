@@ -9,9 +9,9 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLotList;
-    private NormalChooser chooser;
+    protected Chooser chooser;
 
-    public ParkingBoy(NormalChooser chooser) {
+    public ParkingBoy(Chooser chooser) {
         this.chooser = chooser;
         this.parkingLotList = new ArrayList<ParkingLot>();
     }

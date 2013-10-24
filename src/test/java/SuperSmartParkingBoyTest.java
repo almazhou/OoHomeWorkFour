@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 public class SuperSmartParkingBoyTest {
 
-    private SuperSmartParkingBoy superSmartParkingBoy;
+    private ParkingBoy superSmartParkingBoy;
     private ParkingLot parkingLot1;
     private ParkingLot parkingLot;
     private Car car;
@@ -17,7 +17,7 @@ public class SuperSmartParkingBoyTest {
     public void setUp() throws Exception {
         parkingLot = new ParkingLot(2, "1");
         parkingLot1 = new ParkingLot(4, "2");
-        superSmartParkingBoy = new SuperSmartParkingBoy(new SuperChooser());
+        superSmartParkingBoy = new ParkingBoy(new SuperChooser());
         superSmartParkingBoy.manage(parkingLot);
         superSmartParkingBoy.manage(parkingLot1);
         car = new Car("0");

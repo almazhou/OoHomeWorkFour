@@ -40,4 +40,8 @@ public class ParkingLot {
     public double getRatio() {
         return carMap.size()*1.0/lotNum;
     }
+
+    public boolean contains(String token) {
+        return carMap.containsKey(token);
+    }
 }

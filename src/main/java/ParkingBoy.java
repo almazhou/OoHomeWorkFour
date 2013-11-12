@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class ParkingBoy {
     protected List<ParkingLot> parkingLotList;
     protected Chooser chooser;
@@ -36,13 +34,35 @@ public class ParkingBoy {
     }
 
     public Car takeCar(final String token) {
-        Collection<ParkingLot> filter = Collections2.filter(parkingLotList, new Predicate<ParkingLot>() {
-            @Override
-            public boolean apply(ParkingLot lot) {
-                return lot.takeCar(token) != null;
+        for(ParkingLot lot : parkingLotList){
+            if(lot.contains(token)){
+               return lot.takeCar(token);
             }
-        });
+        }
+        return null;
+    }
 
-        return filter.size() != 0 ? newArrayList(filter).get(0).takeCar(token) : null;
+    public List<ParkingLot> getParkingLotList() {
+        return parkingLotList;
+    }
+
+
+    public boolean isFull() {
+        for(ParkingLot lot : parkingLotList){
+            if(lot.getEmptyLotNum()>0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean contains(String token) {
+        for(ParkingLot lot : parkingLotList){
+            if(lot.contains(token)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

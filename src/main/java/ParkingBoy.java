@@ -1,40 +1,26 @@
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class ParkingBoy {
-    protected List<ParkingLot> parkingLotList;
+public class ParkingBoy implements Parkable {
+    protected List<Parkable> parkingLotList;
     protected Chooser chooser;
 
     public ParkingBoy(Chooser chooser) {
         this.chooser = chooser;
-        this.parkingLotList = new ArrayList<ParkingLot>();
+        this.parkingLotList = new ArrayList<Parkable>();
     }
 
-    public void manage(ParkingLot parkingLot) {
-        this.parkingLotList.add(parkingLot);
-    }
 
+
+    @Override
     public String park(Car car) {
-        ParkingLot lot = chooser.choose(parkingLotList);
+        Parkable lot = chooser.choose(parkingLotList);
         return lot != null ? lot.park(car) : null;
     }
 
-    public boolean parkedThisCar(final Car car) {
-        Collection<ParkingLot> filter = Collections2.filter(parkingLotList, new Predicate<ParkingLot>() {
-            @Override
-            public boolean apply(ParkingLot lot) {
-                return lot.contains(car);
-            }
-        });
-        return filter.size() != 0 ? true : false;
-    }
-
+    @Override
     public Car takeCar(final String token) {
-        for(ParkingLot lot : parkingLotList){
+        for(Parkable lot : parkingLotList){
             if(lot.contains(token)){
                return lot.takeCar(token);
             }
@@ -42,27 +28,52 @@ public class ParkingBoy {
         return null;
     }
 
-    public List<ParkingLot> getParkingLotList() {
+    public List<Parkable> getParkingLotList() {
         return parkingLotList;
     }
 
 
+    @Override
     public boolean isFull() {
-        for(ParkingLot lot : parkingLotList){
-            if(lot.getEmptyLotNum()>0){
+        for(Parkable lot : parkingLotList){
+            if(!lot.isFull()){
                 return false;
             }
         }
         return true;
     }
 
+    @Override
     public boolean contains(String token) {
-        for(ParkingLot lot : parkingLotList){
+        for(Parkable lot : parkingLotList){
             if(lot.contains(token)){
                 return true;
             }
         }
 
         return false;
+    }
+
+    @Override
+    public void manage(Parkable parkable) {
+        this.parkingLotList.add(parkable);
+    }
+
+    @Override
+    public int getEmptyLotNum() {
+        int num = 0;
+        for(Parkable parkable : parkingLotList){
+           num += parkable.getEmptyLotNum();
+        }
+        return num;
+    }
+
+    @Override
+    public int getLotNum() {
+        int num = 0;
+        for(Parkable parkable : parkingLotList){
+            num += parkable.getLotNum();
+        }
+        return num;
     }
 }

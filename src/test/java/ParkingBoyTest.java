@@ -30,7 +30,7 @@ public class ParkingBoyTest {
     public void should_park_car_when_has_location() throws Exception {
         parkingBoy.park(car);
 
-        assertThat(parkingBoy.parkedThisCar(car),is(true));
+        assertThat(parkingLot.getEmptyLotNum()+parkingLot1.getEmptyLotNum(),is(1));
     }
 
     @Test
@@ -39,7 +39,8 @@ public class ParkingBoyTest {
         parkingBoy.park(car1);
         parkingBoy.park(car2);
 
-        assertThat(parkingBoy.parkedThisCar(car2),is(false));
+        assertThat(parkingLot.contains(car2),is(false));
+        assertThat(parkingLot1.contains(car2),is(false));
     }
 
     @Test

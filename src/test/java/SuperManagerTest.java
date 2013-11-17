@@ -9,7 +9,7 @@ public class SuperManagerTest {
 
     private SuperManager superManager;
     private ParkingLot parkingLot1;
-    private ParkingManager parkingManager;
+    private Parkable parkingManager;
     private ParkingLot parkingLot2;
     private Car car;
 

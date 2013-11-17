@@ -1,8 +1,8 @@
 import java.util.List;
 
 class NormalChooser implements Chooser {
-    public ParkingLot choose(List<ParkingLot> sortedList) {
-        for(ParkingLot lot : sortedList){
+    public Parkable choose(List<Parkable> sortedList) {
+        for(Parkable lot : sortedList){
             if(lot.getEmptyLotNum()!= 0){
                 return lot;
             }

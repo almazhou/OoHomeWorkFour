@@ -4,35 +4,35 @@ import java.util.List;
 public class ParkingManager extends ParkingBoy{
     @Override
     public String park(Car car) {
-        for(ParkingBoy boy : parkingBoyList){
+        for(Parkable boy : parkableList){
             if(!boy.isFull()){
                return boy.park(car);
             }
         }
 
-        for(ParkingLot lot : parkingLotList){
-            if(lot.getEmptyLotNum()>0){
+        for(Parkable lot : parkingLotList){
+            if(!lot.isFull()){
                 return lot.park(car);
             }
         }
         return null;
     }
 
-    private List<ParkingBoy> parkingBoyList;
+    private List<Parkable> parkableList;
 
     public ParkingManager(Chooser chooser) {
         super(chooser);
-        parkingBoyList = new ArrayList<ParkingBoy>();
+        parkableList = new ArrayList<Parkable>();
     }
 
     @Override
     public Car takeCar(String token) {
-        for(ParkingBoy boy : parkingBoyList){
+        for(Parkable boy : parkableList){
             if(boy.contains(token)){
                 return boy.takeCar(token);
             }
         }
-        for(ParkingLot lot : parkingLotList){
+        for(Parkable lot : parkingLotList){
             if(lot.contains(token)){
                 return lot.takeCar(token);
             }
@@ -40,7 +40,7 @@ public class ParkingManager extends ParkingBoy{
         return null;
     }
 
-    public void manageBoy(ParkingBoy parkingBoy) {
-        this.parkingBoyList.add(parkingBoy);
+    public void manageBoy(Parkable parkable) {
+        this.parkableList.add(parkable);
     }
 }

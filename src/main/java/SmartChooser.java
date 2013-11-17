@@ -1,12 +1,12 @@
 import java.util.List;
 
 class SmartChooser implements Chooser {
-    public ParkingLot choose(List<ParkingLot> sortedList) {
+    public Parkable choose(List<Parkable> sortedList) {
         if(sortedList.size() == 0){
             return null;
         }
-        ParkingLot tempLot = sortedList.get(0);
-        for(ParkingLot lot : sortedList){
+        Parkable tempLot = sortedList.get(0);
+        for(Parkable lot : sortedList){
             if(lot.getEmptyLotNum()> tempLot.getEmptyLotNum()){
                 tempLot = lot;
             }

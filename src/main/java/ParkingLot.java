@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ParkingLot implements Parkable {
@@ -29,9 +31,26 @@ public class ParkingLot implements Parkable {
         return lotNum-carMap.size();
     }
 
+
+
     @Override
     public int getLotNum() {
         return lotNum;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public List<Parkable> getParkableList() {
+        return new ArrayList<Parkable>();
     }
 
     public boolean contains(Car car) {

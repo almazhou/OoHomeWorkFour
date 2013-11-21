@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public interface Parkable {
 
     String park(Car car);
@@ -12,4 +15,9 @@ public interface Parkable {
     public int getEmptyLotNum();
 
     public int getLotNum();
+
+    public String getName();
+    public void setName(String name);
+
+    public List<Parkable> getParkableList();
 }

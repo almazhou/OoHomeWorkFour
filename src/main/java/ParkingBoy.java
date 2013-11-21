@@ -4,6 +4,7 @@ import java.util.List;
 public class ParkingBoy implements Parkable {
     protected List<Parkable> parkingLotList;
     protected Chooser chooser;
+    private String name;
 
     public ParkingBoy(Chooser chooser) {
         this.chooser = chooser;
@@ -75,5 +76,20 @@ public class ParkingBoy implements Parkable {
             num += parkable.getLotNum();
         }
         return num;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public List<Parkable> getParkableList() {
+        return parkingLotList;
     }
 }
